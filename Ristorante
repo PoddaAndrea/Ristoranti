@@ -1,0 +1,93 @@
+package it.unica.pr2.ristoranti;
+
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.Map.Entry;
+
+public class Ristorante {
+	private String nomeRistorante; 
+	private int numeroPosti;
+	private Menu menu;
+	static int numR;
+	static int totNumR;
+	int totOrdini=0;
+	
+	public Ristorante(String nomeRistorante, int numeroPosti, Menu menu) {
+		
+		this.menu=menu;
+		this.nomeRistorante=nomeRistorante;
+		this.numeroPosti=numeroPosti;
+		Ristorante.totNumR+=numeroPosti;
+		Ristorante.numR++;
+	}
+	
+	public static int numeroRistoranti() {
+		
+		return Ristorante.numR;
+	}
+	
+	public int posti() {
+		return this.numeroPosti;
+	}
+	
+	public static int totalePosti() {
+		return Ristorante.totNumR;
+	}
+	
+	public String mostExpensive() {
+		return menu.mostExpensive();
+	}
+	
+	public Menu menu() {
+		return menu;
+	}
+	
+	public boolean isInTheMenu(String unPiatto) {
+		
+		Set<Entry<String, Double>> set = menu.entrySet();
+		ArrayList<Entry<String, Double>> arrayM= new ArrayList<>(set);
+		
+		for(Entry<String, Double>lst: arrayM) {
+			if(lst.getKey()== unPiatto) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+	public String getNomeRistorante() {
+		return nomeRistorante;
+	}
+	
+	public Order order(String... ordini) {
+		
+		double tot=0;
+		
+		
+		
+		totOrdini+=ordini.length;
+		
+		
+		if(totOrdini > this.numeroPosti) {
+			throw new TooMuchPeopleException();
+		}
+		
+		
+		
+		for(String lst: ordini) {
+			
+			if(menu.containsKey(lst)) {
+				
+				
+				tot+=menu.get(lst);
+			}
+		}
+
+			
+		
+		
+		
+		return new Order(ordini.length, tot);
+	}
+}

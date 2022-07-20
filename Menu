@@ -1,0 +1,38 @@
+package it.unica.pr2.ristoranti;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import java.util.Set;
+
+
+@SuppressWarnings("serial")
+public class Menu extends HashMap<String, Double> {
+	
+	
+	
+	public  Menu () {
+		
+	}
+	
+	public String mostExpensive() {
+		
+		Set<Entry<String, Double>> set = this.entrySet();
+		ArrayList<Entry<String, Double>> arrayP= new ArrayList<>(set);
+		
+		double massimo=arrayP.get(0).getValue();
+		String costoso="";
+		for(Entry<String, Double> lst: arrayP) {
+			if(massimo < lst.getValue()) {
+				massimo=lst.getValue();
+				costoso=lst.getKey();
+			}
+		}
+		
+		
+		return costoso;
+		
+		
+	}
+
+	
+}

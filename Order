@@ -1,0 +1,21 @@
+package it.unica.pr2.ristoranti;
+
+public class Order {
+	
+	int numPersone;
+	double tot;
+	public Order(int numPersone, double tot) {
+		this.numPersone=numPersone;
+		this.tot=tot;
+	}
+	
+	public int people() {
+		
+		return numPersone;
+	}
+	
+	public double cost() {
+		
+		return tot;
+	}
+}
